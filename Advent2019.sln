@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Scripts", "Scripts\Scripts.fsproj", "{58C9BDD0-8904-4318-A872-55022554443C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58C9BDD0-8904-4318-A872-55022554443C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58C9BDD0-8904-4318-A872-55022554443C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58C9BDD0-8904-4318-A872-55022554443C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{58C9BDD0-8904-4318-A872-55022554443C}.Debug|x64.Build.0 = Debug|Any CPU
+		{58C9BDD0-8904-4318-A872-55022554443C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{58C9BDD0-8904-4318-A872-55022554443C}.Debug|x86.Build.0 = Debug|Any CPU
+		{58C9BDD0-8904-4318-A872-55022554443C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58C9BDD0-8904-4318-A872-55022554443C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58C9BDD0-8904-4318-A872-55022554443C}.Release|x64.ActiveCfg = Release|Any CPU
+		{58C9BDD0-8904-4318-A872-55022554443C}.Release|x64.Build.0 = Release|Any CPU
+		{58C9BDD0-8904-4318-A872-55022554443C}.Release|x86.ActiveCfg = Release|Any CPU
+		{58C9BDD0-8904-4318-A872-55022554443C}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0E2979C9-8ED3-4219-922D-EADC9DBC39AE}
+	EndGlobalSection
+EndGlobal
