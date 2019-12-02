@@ -1,0 +1,1 @@
+public static IEnumerable<T> ParseCsv<T>(string data) => string.Split(',', data);
