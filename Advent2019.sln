@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Scripts", "Scripts\Scripts.fsproj", "{58C9BDD0-8904-4318-A872-55022554443C}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Scripts", "Scripts\Scripts.fsproj", "{58C9BDD0-8904-4318-A872-55022554443C}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "AdventTests", "AdventTests\AdventTests.fsproj", "{8189D5C1-FF00-4F61-8E1E-D6E4B8F73835}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,18 @@ Global
 		{58C9BDD0-8904-4318-A872-55022554443C}.Release|x64.Build.0 = Release|Any CPU
 		{58C9BDD0-8904-4318-A872-55022554443C}.Release|x86.ActiveCfg = Release|Any CPU
 		{58C9BDD0-8904-4318-A872-55022554443C}.Release|x86.Build.0 = Release|Any CPU
+		{8189D5C1-FF00-4F61-8E1E-D6E4B8F73835}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8189D5C1-FF00-4F61-8E1E-D6E4B8F73835}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8189D5C1-FF00-4F61-8E1E-D6E4B8F73835}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8189D5C1-FF00-4F61-8E1E-D6E4B8F73835}.Debug|x64.Build.0 = Debug|Any CPU
+		{8189D5C1-FF00-4F61-8E1E-D6E4B8F73835}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8189D5C1-FF00-4F61-8E1E-D6E4B8F73835}.Debug|x86.Build.0 = Debug|Any CPU
+		{8189D5C1-FF00-4F61-8E1E-D6E4B8F73835}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8189D5C1-FF00-4F61-8E1E-D6E4B8F73835}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8189D5C1-FF00-4F61-8E1E-D6E4B8F73835}.Release|x64.ActiveCfg = Release|Any CPU
+		{8189D5C1-FF00-4F61-8E1E-D6E4B8F73835}.Release|x64.Build.0 = Release|Any CPU
+		{8189D5C1-FF00-4F61-8E1E-D6E4B8F73835}.Release|x86.ActiveCfg = Release|Any CPU
+		{8189D5C1-FF00-4F61-8E1E-D6E4B8F73835}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
