@@ -1,19 +1,15 @@
 let candidates = [|387638..919123|]
 
-let intToInts i = 
-    // I think this could be done MUCH better but this splits the ints and keeps them in order
-    [|
-        i / 100000;
-        i % 100000 / 10000; 
-        i % 10000 / 1000; 
-        i % 1000 / 100;
-        i % 100 / 10;
-        i % 10;
-    |]
+let intToInts =
+    // Thanks Ted
+    let tokenize (i:int) = if i = 0 then None else Some(i%10,i/10)
+    let crack (i:int) = i |> Array.unfold tokenize |> Array.rev
+    crack
 
 let qualifies (ints:int[]) :bool =
     let windows = Array.windowed 2 ints
 
+    //  Should look at linter warning here
     let hasPair (a:int[][]) :bool = a |> Array.exists (fun [|h;t|] -> h = t)
     let incremental (a:int[][]) :bool = a |> Array.forall (fun [|h;t|] -> h <= t)
 
@@ -29,6 +25,6 @@ let atLeastOnePair (ints:int[]) :bool =
 
 candidates
 |> Array.map intToInts
-|> Array.where qualifies
+|> Array.where qualifies // Part 1 would have an |> Array.length
 |> Array.where atLeastOnePair
 |> Array.length 
