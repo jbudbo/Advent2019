@@ -20,7 +20,15 @@ let qualifies (ints:int[]) :bool =
     // Not a fan of this, seems we could/should curry
     incremental windows && hasPair windows
 
+let atLeastOnePair (ints:int[]) :bool =
+    ints 
+    |> Array.groupBy id
+    |> Array.where (fun (_,x) -> (Array.length x) = 2) 
+    |> Array.length > 0
+   
+
 candidates
 |> Array.map intToInts
 |> Array.where qualifies
-|> Array.length
+|> Array.where atLeastOnePair
+|> Array.length 
