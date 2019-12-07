@@ -15,6 +15,8 @@ let compute (cleanData:int[]) =
         match Array.head l with
         | 1 -> Some(add l.[1] l.[2] l.[3])
         | 2 -> Some(mult l.[1] l.[2] l.[3])
+        | 3 -> 
+        | 4 ->
         | 99 -> None
         | x -> failwithf "Unknown OP Code %i" x
 
@@ -29,7 +31,7 @@ let compute (cleanData:int[]) =
     cleanData
 
 let getResultFor noun verb =
-    readData "inputs/Day2"
+    readData "inputs/Day5"
     |> fun (arr:int[]) ->
         arr.[1] <- noun
         arr.[2] <- verb
@@ -41,14 +43,3 @@ let getResultFor noun verb =
 getResultFor 12 2
 
 // Part2
-// I can do this so much better
-let generator = seq {
-    for noun in [|0..99|] do
-        for verb in [|0..99|] do
-            yield (noun,verb,getResultFor noun verb)
-}
-
-generator 
-|> Seq.where (fun (_,_,t) -> t = 19690720) 
-|> Seq.map (fun (noun,verb,_) -> 100 * noun + verb)
-|> Seq.exactlyOne
