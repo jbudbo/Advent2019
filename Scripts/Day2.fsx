@@ -4,13 +4,7 @@ let readData (path:string) =
     File.ReadAllText(path).Split ',' 
     |> Array.map int
 
-let part1 (dataFile:string) =
-    let cleanData = readData dataFile
-
-    //  Start puzzle
-    cleanData.[1] <- 12
-    cleanData.[2] <- 2
-
+let compute (cleanData:int[]) =
     let add x y i =
         cleanData.[i] <- cleanData.[x] + cleanData.[y]
 
@@ -28,10 +22,33 @@ let part1 (dataFile:string) =
         if i <= (cleanData.Length - 4) then
             match Array.sub cleanData i 4 |> execOp with
             | Some(_) -> chunki (i + 4)
-            | None -> printf "DONE"
+            | None -> () //Burn
         
     chunki 0
 
-    cleanData.[0]
+    cleanData
 
-part1 "inputs/Day2"
+let getResultFor noun verb =
+    readData "inputs/Day2"
+    |> fun (arr:int[]) ->
+        arr.[1] <- noun
+        arr.[2] <- verb
+        arr
+    |> compute
+    |> Array.head
+
+// Part1
+getResultFor 12 2
+
+// Part2
+// I can do this so much better
+let generator = seq {
+    for x in [|0..99|] do
+        for y in [|0..99|] do
+            yield (x,y,getResultFor x y)
+}
+
+generator 
+|> Seq.where (fun (_,_,t) -> t = 19690720) 
+|> Seq.map (fun (noun,verb,_) -> 100 * noun + verb)
+|> Seq.exactlyOne
