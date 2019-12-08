@@ -6,29 +6,39 @@ let readData (path:string) =
     File.ReadAllText(path) 
     |> Seq.map toInt
 
-let getLayers x y = 
-    // readData "inputs/Day8" 
-    "0222112222120000" |> Seq.map toInt
-    |> Seq.chunkBySize (x * y)
-
 let part1 viewX viewY =
-    getLayers viewX viewY
+    readData "inputs/Day8" 
+    |> Seq.chunkBySize (viewX * viewY)
     |> Seq.map (fun x -> x |> Seq.countBy id |> Seq.sortBy fst)
     |> Seq.sortBy (fun x -> x |> Seq.head |> snd)
     |> Seq.head
     |> Seq.where (fun x -> fst x > 0)
     |> Seq.map snd
-    |> Seq.fold (fun x i -> x * i) 1
+    |> Seq.fold (*) 1
 
 let part2 viewX viewY =
-    getLayers viewX viewY
+    readData "inputs/Day8"
+    |> Seq.chunkBySize (viewX * viewY)
+    |> Seq.toArray
+    |> Seq.fold (fun acc layer ->
+        Array.map2 (fun a b -> 
+            match a with
+            | 2 -> b // 2 is transparent
+            | _ -> a // If it's anything else take that
+        ) acc layer
+    ) (Array.create (viewX * viewY) 2)
+    |> Array.chunkBySize viewX
+    |> Array.map (fun acc -> acc |> Array.map (fun c -> 
+        // Lets make this more readable
+        match c with 
+        | 0 -> ' ' // Black
+        | 1 -> '@' // White 
+        | 2 -> ' ' // Transparent
+        | _ -> ' '
+        ))
+    |> Array.map System.String
+    |> Array.iter (fun s -> printfn "%s" s)
 
-let flattener = 
-    let smallest x y = if x < y then x else y
-    [ smallest; smallest; smallest ]
+part1 25 6
 
-let apply arr = Seq.map2 (fun f x -> f x) flattener arr
-
-part2 2 2 |> Seq.toArray |> apply |> Seq.toArray
-
-// part1 25 6
+part2 25 6
