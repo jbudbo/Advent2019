@@ -1,45 +1,83 @@
 open System.IO
 
-let readData (path:string) =  
-    File.ReadAllText(path).Split ',' 
+let runProgram input =
+    let intToInts =
+        let tokenize (i:int) = if i = 0 then None else Some(i%10,i/10)
+        let crack (i:int) = i |> Array.unfold tokenize |> Array.rev
+        crack
+
+    let padLeft (arr:int[]) :int[] =
+        let result = Array.zeroCreate 3
+        arr |> Array.rev |> Array.iteri (fun acc a -> result.[acc] <- a)
+        result
+
+    File.ReadAllText("inputs/Day5").Split ','
     |> Array.map int
+    |> fun instructionSet ->
+        let rec execute x =
+            let op = instructionSet.[x] % 100
+            let modes = instructionSet.[x] / 100 |> intToInts |> padLeft
 
-let compute (cleanData:int[]) =
-    let add x y i =
-        cleanData.[i] <- cleanData.[x] + cleanData.[y]
+            match op with
+            | 1 -> // ADD
+                let t :int[] = instructionSet.[(x+1)..x+3]
+                let param1 = if modes.[0] = 0 then instructionSet.[t.[0]] else t.[0]
+                let param2 = if modes.[1] = 0 then instructionSet.[t.[1]] else t.[1]
+                instructionSet.[t.[2]] <- param1 + param2
+                execute (x + 4)
 
-    let mult x y i =
-        cleanData.[i] <- cleanData.[x] * cleanData.[y]
+            | 2 -> // MULTIPLY
+                let t :int[] = instructionSet.[(x+1)..x+3]
+                let param1 = if modes.[0] = 0 then instructionSet.[t.[0]] else t.[0]
+                let param2 = if modes.[1] = 0 then instructionSet.[t.[1]] else t.[1]
+                instructionSet.[t.[2]] <- param1 * param2
+                execute (x+4)
 
-    let execOp (l:int[]) =
-        match Array.head l with
-        | 1 -> Some(add l.[1] l.[2] l.[3])
-        | 2 -> Some(mult l.[1] l.[2] l.[3])
-        | 3 -> 
-        | 4 ->
-        | 99 -> None
-        | x -> failwithf "Unknown OP Code %i" x
+            | 3 -> // INPUT
+                let t :int = instructionSet.[x+1]
+                instructionSet.[t] <- input
+                execute (x+2)
 
-    let rec chunki i =
-        if i <= (cleanData.Length - 4) then
-            match Array.sub cleanData i 4 |> execOp with
-            | Some(_) -> chunki (i + 4)
-            | None -> () //Burn
-        
-    chunki 0
+            | 4 -> // OUTPUT
+                let t :int = instructionSet.[x+1]
+                printfn "Output %i" instructionSet.[t]
+                execute (x+2)
 
-    cleanData
+            | 5 -> // JUMP IF TRUE
+                let t :int[] = instructionSet.[(x+1)..x+3]
+                let param1 = if modes.[0] = 0 then instructionSet.[t.[0]] else t.[0]
+                let param2 = if modes.[1] = 0 then instructionSet.[t.[1]] else t.[1]
+                if param1 <> 0 then
+                    execute (param2)
+                else
+                    execute (x + 3) 
 
-let getResultFor noun verb =
-    readData "inputs/Day5"
-    |> fun (arr:int[]) ->
-        arr.[1] <- noun
-        arr.[2] <- verb
-        arr
-    |> compute
-    |> Array.head
+            | 6 -> // JUMP IF FALSE
+                let t :int[] = instructionSet.[(x+1)..x+3]
+                let param1 = if modes.[0] = 0 then instructionSet.[t.[0]] else t.[0]
+                let param2 = if modes.[1] = 0 then instructionSet.[t.[1]] else t.[1]
+                if param1 = 0 then 
+                    execute (param2)
+                else
+                    execute (x + 3) 
 
-// Part1
-getResultFor 12 2
+            | 7 -> // LESS THAN
+                let t :int[] = instructionSet.[(x+1)..x+3]
+                let param1 = if modes.[0] = 0 then instructionSet.[t.[0]] else t.[0]
+                let param2 = if modes.[1] = 0 then instructionSet.[t.[1]] else t.[1]
+                instructionSet.[t.[2]] <- if param1 < param2 then 1 else 0
+                execute (x+4)
 
-// Part2
+            | 8 -> // EQUALS
+                let t :int[] = instructionSet.[(x+1)..x+3]
+                let param1 = if modes.[0] = 0 then instructionSet.[t.[0]] else t.[0]
+                let param2 = if modes.[1] = 0 then instructionSet.[t.[1]] else t.[1]
+                instructionSet.[t.[2]] <- if param1 = param2 then 1 else 0
+                execute (x+4)
+
+            | 99 -> ()
+            | x -> failwithf "Unexpected OP Code %i" x
+
+        execute 0
+
+runProgram 5
