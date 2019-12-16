@@ -7,7 +7,7 @@ let readData (path:string) =
     |> Seq.map toInt
 
 let part1 viewX viewY =
-    readData "inputs/Day8" 
+    readData "Scripts/inputs/Day8" 
     |> Seq.chunkBySize (viewX * viewY)
     |> Seq.map (fun x -> x |> Seq.countBy id |> Seq.sortBy fst)
     |> Seq.sortBy (fun x -> x |> Seq.head |> snd)
@@ -17,7 +17,7 @@ let part1 viewX viewY =
     |> Seq.fold (*) 1
 
 let part2 viewX viewY =
-    readData "inputs/Day8"
+    readData "Scripts/inputs/Day8"
     |> Seq.chunkBySize (viewX * viewY)
     |> Seq.toArray
     |> Seq.fold (fun acc layer ->
@@ -31,7 +31,7 @@ let part2 viewX viewY =
     |> Array.map (fun acc -> acc |> Array.map (fun c -> 
         // Lets make this more readable
         match c with 
-        | 0 -> ' ' // Black
+        | 0 -> '-' // Black
         | 1 -> '@' // White 
         | 2 -> ' ' // Transparent
         | _ -> ' '
@@ -39,6 +39,6 @@ let part2 viewX viewY =
     |> Array.map System.String
     |> Array.iter (fun s -> printfn "%s" s)
 
-part1 25 6
+// part1 25 6
 
 part2 25 6
