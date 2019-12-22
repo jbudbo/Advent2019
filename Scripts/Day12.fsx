@@ -21,8 +21,8 @@ let inline thrd (_,_,c) = c;
 let applyGravity (moons:seq<int*int*int>) :seq<int*int*int> =     
     let cache = Seq.cache moons
 
-    let onEach (actor:'a 'a -> unit) (start:'a[]) =
-        actor 
+    //let onEach (actor:'a 'a -> unit) (start:'a[]) =
+    //    actor 
 
     let calcDimension (dim:int[]) =
         dim
@@ -31,7 +31,9 @@ let applyGravity (moons:seq<int*int*int>) :seq<int*int*int> =
     let y = Seq.map snd cache
     let z = Seq.map thrd cache
 
-    Seq.zip3 x y z
+    
+
+    //Seq.zip3 x y z
 
 mock
 |> applyGravity
